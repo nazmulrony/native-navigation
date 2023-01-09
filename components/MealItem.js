@@ -7,6 +7,7 @@ import {
     View,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import MealDetails from "./MealDetails";
 
 const MealItem = ({
     id,
@@ -40,15 +41,11 @@ const MealItem = ({
                         />
                         <Text style={styles.title}>{title}</Text>
                     </View>
-                    <View style={styles.details}>
-                        <Text style={styles.detailsItem}>{duration}m</Text>
-                        <Text style={styles.detailsItem}>
-                            {complexity.toUpperCase()}
-                        </Text>
-                        <Text style={styles.detailsItem}>
-                            {affordability.toUpperCase()}
-                        </Text>
-                    </View>
+                    <MealDetails
+                        duration={duration}
+                        complexity={complexity}
+                        affordability={affordability}
+                    />
                 </View>
             </Pressable>
         </View>
@@ -84,14 +81,5 @@ const styles = StyleSheet.create({
         fontSize: 18,
         textAlign: "center",
         fontWeight: "bold",
-    },
-    details: {
-        padding: 8,
-        flexDirection: "row",
-        justifyContent: "center",
-    },
-    detailsItem: {
-        fontSize: 12,
-        marginHorizontal: 8,
     },
 });
