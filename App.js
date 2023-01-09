@@ -14,11 +14,11 @@ export default function App() {
             <NavigationContainer>
                 <Stack.Navigator>
                     <Stack.Screen
-                        name="Meals Categories"
+                        name="MealsCategories"
                         component={CategoriesScreen}
                     />
                     <Stack.Screen
-                        name="Meal Overview"
+                        name="MealOverview"
                         component={MealOverviewScreen}
                     />
                 </Stack.Navigator>
