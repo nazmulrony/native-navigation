@@ -10,7 +10,10 @@ import {
 const MealItem = ({ title, imageUrl, duration, complexity, affordability }) => {
     return (
         <View style={styles.container}>
-            <Pressable android_ripple={{ color: "#ccc" }}>
+            <Pressable
+                android_ripple={{ color: "#ccc" }}
+                style={({ pressed }) => (pressed ? styles.pressedButton : null)}
+            >
                 <View style={styles.innerContainer}>
                     <View>
                         <Image

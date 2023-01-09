@@ -3,12 +3,12 @@ import { FlatList, Pressable, StyleSheet, View } from "react-native";
 import MealItem from "../components/MealItem";
 import { MEALS } from "../data/dummy-data";
 
-const MealOverviewScreen = ({ route }) => {
+const MealOverviewScreen = ({ route, navigation }) => {
     const catId = route.params.categoryId;
     const displayedMeals = MEALS.filter((mealItem) => {
         return mealItem.categoryIds.indexOf(catId) >= 0;
     });
-
+    //dynamic title of the screen
     const renderMealItem = (itemData) => {
         const item = itemData.item;
         const mealItemProps = {
