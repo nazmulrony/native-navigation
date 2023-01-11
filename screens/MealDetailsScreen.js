@@ -1,4 +1,4 @@
-import { useLayoutEffect } from "react";
+import { useContext, useLayoutEffect } from "react";
 import {
     Button,
     Image,
@@ -12,26 +12,35 @@ import List from "../components/MealDetail/List";
 import Subtitle from "../components/MealDetail/Subtitle";
 import MealDetails from "../components/MealDetails";
 import { MEALS } from "../data/dummy-data";
+import { FavoriteContext } from "../store/conetext/favorite-context";
 
 const MealDetailsScreen = ({ route, navigation }) => {
+    const { ids, addFavorite, removeFavorite } = useContext(FavoriteContext);
     const mealId = route.params.mealId;
     const selectedMeal = MEALS.find((meal) => meal.id === mealId);
 
-    function iconButtonPressHandler() {
-        console.log("pressed");
+    //check if meal is favorite
+    const mealIsFavorite = ids.includes(mealId);
+
+    function changeFavoriteStatusHandler() {
+        if (mealIsFavorite) {
+            removeFavorite(mealId);
+        } else {
+            addFavorite(mealId);
+        }
     }
 
     useLayoutEffect(() => {
         navigation.setOptions({
             headerRight: () => (
                 <IconButton
-                    icon={"star"}
+                    icon={mealIsFavorite ? "star" : "star-outline"}
                     color="white"
-                    onPress={iconButtonPressHandler}
+                    onPress={changeFavoriteStatusHandler}
                 />
             ),
         });
-    }, []);
+    }, [navigation, changeFavoriteStatusHandler]);
     return (
         <ScrollView style={styles.container}>
             <Image
@@ -61,7 +70,7 @@ export default MealDetailsScreen;
 
 const styles = StyleSheet.create({
     container: {
-        marginBottom: 32,
+        // marginBottom: 32,
     },
     image: {
         width: "100%",
@@ -82,5 +91,6 @@ const styles = StyleSheet.create({
     },
     listContainer: {
         width: "80%",
+        paddingBottom: 32,
     },
 });
